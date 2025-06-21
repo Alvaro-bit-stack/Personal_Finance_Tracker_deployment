@@ -3,17 +3,20 @@ import psycopg2
 import streamlit as st
 import plotly.express as px
 import os
+from dotenv import load_dotenv
+# Load environment variables from .env file
+load_dotenv()
 
 # Set wide layout
 st.set_page_config(page_title="Personal Finance Dashboard", layout="wide")
 
-# Connect to PostgreSQL
+# Connect to Supabase database
 conn = psycopg2.connect(
-    host=os.getenv("DB_HOST", "localhost"),
-    database=os.getenv("DB_NAME", "personal_finance"),
-    user=os.getenv("DB_USER", "postgres"),
-    password=os.getenv("DB_PASSWORD", ""),
-    port=os.getenv("DB_PORT", "5432")
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=os.getenv("DB_PORT")
 )
 
 # --- KPI Data ---
